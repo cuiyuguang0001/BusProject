@@ -1,5 +1,6 @@
-document.write("<script language=javascript src='static/jQuery/jquery-3.4.1.min.js'></script>");
-document.write("<script language=javascript src='static/layui/layui.js'></script>");
+document.write("<script src=\"../assets/layui.all.js\"></script>");
+document.write("<script language=javascript src='../jQuery/jquery-3.4.1.min.js'></script>");
+document.write("<link rel=\"stylesheet\" href=\"../assets/css/layui.css\">");
 
 var user = {
     defaultUrl:'http://localhost:9010'
@@ -7,11 +8,10 @@ var user = {
 
 var myurl = {
     //user表操作
-    userList: '/user/userList',//模糊查询参数 name(传不传都行)
-    userAdd: '/user/userAdd',//添加 参数 name,age,sex,sal,post
-    userEdit: '/user/userEdit',//修改 参数 id name age sex sal post
-    userDel: '/user/userDel',//删除 参数 id
-    userListName: '/user/userListName',//查询所有员工名字
+    userList: '/bus_user/list',//模糊查询参数 name(传不传都行)
+    userAdd: '/bus_user/add',//添加 参数 name,age,sex,sal,post
+    userEdit: '/bus_user/edit',//修改 参数 id name age sex sal post
+    userDel: '/bus_user/del',//删除 参数 id
     //登陆
     login: '/user/login', //参数 username pwd
     //boat表操作

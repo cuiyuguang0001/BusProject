@@ -69,7 +69,7 @@ public class CommitUtil {
     public static String timestampToStr(long dateline){
 
         Timestamp timestamp = new Timestamp(dateline*1000);
-        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");//定义格式，不显示毫秒
+        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日");//定义格式，不显示毫秒
         return df.format(timestamp);
     }
 

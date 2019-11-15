@@ -35,7 +35,7 @@ public class PageUtil {
 
 
     public int getStart() {
-        return start;
+        return start - 1;
     }
 
     public void setStart(int start) {

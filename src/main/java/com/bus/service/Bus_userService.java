@@ -22,7 +22,7 @@ public class Bus_userService{
 		map.put("page", pageUtil);
 		List<Bus_user> bus_users = bus_userMapper.bus_userList(map);
 		for(Bus_user b : bus_users)
-			b.setJoinDate(CommitUtil.getShortTime(b.getJoinDate()));
+			b.setJoinDate(CommitUtil.timestampToStr(Long.valueOf(b.getJoinDate())));
 		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_users, pageUtil.getCount());
 	}
 

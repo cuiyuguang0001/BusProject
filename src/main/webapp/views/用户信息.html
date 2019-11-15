@@ -1,1 +1,27 @@
-用户信息
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>layout 后台大布局 - Layui</title>
+        <script src="../js/httpReq.js" type="text/javascript" charset="utf-8"></script>
+
+    </head>
+    <body>
+        <!-- 内容主体区域 -->
+        <!-- 数据表格 -->
+        <div class="demoTable " style="margin-top: 1%">
+            &nbsp;&nbsp;&nbsp;&nbsp;搜索用户姓名：
+            <div class="layui-inline">
+                <input  id="select" class="layui-input" name="id" autocomplete="off">
+            </div>
+            <button  class="layui-btn" data-type="reload" onclick="common.reload('userData', {name:$('#select').val()})">搜索</button>
+            <script type="text/html" id="barDemo">
+                <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit" onclick="update()">编辑</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+        </div>
+        <table class="layui-hide" id="userData" lay-filter="userData"></table>
+    </body>
+    <script src="../js/用户信息.js" type="text/javascript" charset="utf-8"></script>
+</html>
+

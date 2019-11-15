@@ -17,7 +17,7 @@ public class Request extends HashMap<String, Object> {
 
     public Request okList(List list, int count){
         put("data", list);
-        put("data", count);
+        put("count", count);
         return this;
     }
 
