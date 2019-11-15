@@ -10,7 +10,7 @@ import java.util.Map;
 public interface Bus_jobMapper{
 
 	@Select("select list, id, name from bus_job")
-	List<Bus_job> bus_jobList(Map<String, Object> map);
+	List<Bus_job> bus_jobQuery(Map<String, Object> map);
 
 	@Insert("insert into bus_job(list, name) values(#{list}, #{name}")
 	boolean bus_jobAdd(Bus_job bus_job);

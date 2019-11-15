@@ -10,7 +10,7 @@ public class Bus_uploadorder{
 	//维修原因
 	private String desc;
 	//时间
-	private int time;
+	private String time;
 	//状态0未审核1通过2拒绝
 	private int state;
 
@@ -46,11 +46,11 @@ public class Bus_uploadorder{
 		this.desc=desc;
 	}
 
-	public int getTime(){
+	public String getTime(){
 		return time;
 	}
 
-	public void setTime(int time){
+	public void setTime(String time){
 		this.time=time;
 	}
 

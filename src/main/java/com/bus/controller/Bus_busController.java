@@ -15,20 +15,24 @@ public class Bus_busController{
 	@Autowired
 	Bus_busService bus_busService;
 
-	public Map<String, Object> bus_busList(Bus_bus bus_bus){
-		return null;
+	@PostMapping("list")
+	public Map<String, Object> bus_busList(@RequestBody Map<String, Object> map){
+		return bus_busService.bus_busList(map);
 	}
 
-	public Map<String, Object> bus_busAdd(Bus_bus bus_bus){
-		return null;
+	@PostMapping("add")
+	public Map<String, Object> bus_busAdd(@RequestBody Bus_bus bus_bus){
+		return bus_busService.bus_busAdd(bus_bus);
 	}
 
-	public Map<String, Object> bus_busEdit(Bus_bus bus_bus){
-		return null;
+	@PostMapping("edit")
+	public Map<String, Object> bus_busEdit(@RequestBody Bus_bus bus_bus){
+		return bus_busService.bus_busEdit(bus_bus);
 	}
 
-	public Map<String, Object> bus_busDel(Bus_bus bus_bus){
-		return null;
+	@PostMapping("del")
+	public Map<String, Object> bus_busDel(@RequestBody Bus_bus bus_bus){
+		return bus_busService.bus_busDel(bus_bus);
 	}
 
 }

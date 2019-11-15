@@ -15,20 +15,24 @@ public class Bus_jobController{
 	@Autowired
 	Bus_jobService bus_jobService;
 
-	public Map<String, Object> bus_jobList(Bus_job bus_job){
-		return null;
+	@PostMapping("list")
+	public Map<String, Object> bus_jobList(@RequestBody Map<String, Object> map){
+		return bus_jobService.bus_jobList(map);
 	}
 
-	public Map<String, Object> bus_jobAdd(Bus_job bus_job){
-		return null;
+	@PostMapping("add")
+	public Map<String, Object> bus_jobAdd(@RequestBody Bus_job bus_job){
+		return bus_jobService.bus_jobAdd(bus_job);
 	}
 
-	public Map<String, Object> bus_jobEdit(Bus_job bus_job){
-		return null;
+	@PostMapping("edit")
+	public Map<String, Object> bus_jobEdit(@RequestBody Bus_job bus_job){
+		return bus_jobService.bus_jobEdit(bus_job);
 	}
 
-	public Map<String, Object> bus_jobDel(Bus_job bus_job){
-		return null;
+	@PostMapping("del")
+	public Map<String, Object> bus_jobDel(@RequestBody Bus_job bus_job){
+		return bus_jobService.bus_jobDel(bus_job);
 	}
 
 }

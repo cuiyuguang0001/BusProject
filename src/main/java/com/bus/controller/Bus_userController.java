@@ -21,18 +21,18 @@ public class Bus_userController{
 	}
 
 	@PostMapping("add")
-	public Map<String, Object> bus_userAdd(Bus_user bus_user){
-		return null;
+	public Map<String, Object> bus_userAdd(@RequestBody Bus_user bus_user){
+		return bus_userService.bus_userAdd(bus_user);
 	}
 
 	@PostMapping("edit")
 	public Map<String, Object> bus_userEdit(Bus_user bus_user){
-		return null;
+		return bus_userService.bus_userEdit(bus_user);
 	}
 
 	@PostMapping("del")
 	public Map<String, Object> bus_userDel(Bus_user bus_user){
-		return null;
+		return bus_userService.bus_userDel(bus_user);
 	}
 
 }

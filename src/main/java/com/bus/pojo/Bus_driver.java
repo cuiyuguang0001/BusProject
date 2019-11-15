@@ -8,7 +8,7 @@ public class Bus_driver{
 	private int age;
 	private String brithday;
 	//添加日期
-	private int time;
+	private String time;
 	//是否禁用1是0否
 	private int state;
 
@@ -52,11 +52,11 @@ public class Bus_driver{
 		this.brithday=brithday;
 	}
 
-	public int getTime(){
+	public String getTime(){
 		return time;
 	}
 
-	public void setTime(int time){
+	public void setTime(String time){
 		this.time=time;
 	}
 

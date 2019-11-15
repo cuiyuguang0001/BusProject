@@ -9,13 +9,13 @@ import java.util.Map;
 @Mapper
 public interface Bus_driverMapper{
 
-	@Select("select id, name, sfz, age, brithday, time, state from bus_driver")
+	@Select("select id, name, sfz, age, brithday, time, state from bus_driver where state = 0")
 	List<Bus_driver> bus_driverList(Map<String, Object> map);
 
-	@Insert("insert into bus_driver(name, sfz, age, brithday, time, state) values(#{name}, #{sfz}, #{age}, #{brithday}, #{time}, #{state}")
+	@Insert("insert into bus_driver(name, sfz, age, brithday, time, state) values(#{name}, #{sfz}, #{age}, #{brithday}, #{time}, 0")
 	boolean bus_driverAdd(Bus_driver bus_driver);
 
-	@Update("update bus_driver set name = #{name}, sfz = #{sfz}, age = #{age}, brithday = #{brithday}, time = #{time}, state = #{state} where id = #{id}")
+	@Update("update bus_driver set name = #{name}, sfz = #{sfz}, age = #{age}, brithday = #{brithday}, state = #{state} where id = #{id}")
 	boolean bus_driverEdit(Bus_driver bus_driver);
 
 	@Delete("delete from bus_driver where id = #{id}")

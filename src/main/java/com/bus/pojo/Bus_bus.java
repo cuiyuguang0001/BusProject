@@ -8,9 +8,9 @@ public class Bus_bus{
 	//型号
 	private String norms;
 	//购买时间
-	private int buyTime;
+	private String buyTime;
 	//最后维修时间
-	private int uploadTime;
+	private String uploadTime;
 	//是否启用1启用0不启用
 	private int state;
 
@@ -38,19 +38,19 @@ public class Bus_bus{
 		this.norms=norms;
 	}
 
-	public int getBuyTime(){
+	public String getBuyTime(){
 		return buyTime;
 	}
 
-	public void setBuyTime(int buyTime){
+	public void setBuyTime(String buyTime){
 		this.buyTime=buyTime;
 	}
 
-	public int getUploadTime(){
+	public String getUploadTime(){
 		return uploadTime;
 	}
 
-	public void setUploadTime(int uploadTime){
+	public void setUploadTime(String uploadTime){
 		this.uploadTime=uploadTime;
 	}
 

@@ -1,6 +1,7 @@
 package com.bus.service;
 
 import com.bus.util.CommitUtil;
+import com.bus.util.Constant;
 import com.bus.util.PageUtil;
 import com.bus.util.Request;
 import org.springframework.stereotype.Service;
@@ -22,19 +23,26 @@ public class Bus_userService{
 		List<Bus_user> bus_users = bus_userMapper.bus_userList(map);
 		for(Bus_user b : bus_users)
 			b.setJoinDate(CommitUtil.getShortTime(b.getJoinDate()));
-		return new Request().ok("响应成功").okList(bus_users, pageUtil.getCount());
+		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_users, pageUtil.getCount());
 	}
 
 	public Map<String, Object> bus_userAdd(Bus_user bus_user){
-		return null;
+		bus_user.setJoinDate(CommitUtil.getTineLine());
+		if(!bus_userMapper.bus_userAdd(bus_user))
+			return new Request().error(Constant.ERROR_MSG);
+		return new Request().ok(Constant.REQUEST_GOOD);
 	}
 
 	public Map<String, Object> bus_userEdit(Bus_user bus_user){
-		return null;
+		if(!bus_userMapper.bus_userEdit(bus_user))
+			return new Request().error(Constant.ERROR_MSG);
+		return new Request().ok(Constant.REQUEST_GOOD);
 	}
 
 	public Map<String, Object> bus_userDel(Bus_user bus_user){
-		return null;
+		if(!bus_userMapper.bus_userDel(bus_user))
+			return new Request().error(Constant.ERROR_MSG);
+		return new Request().ok(Constant.REQUEST_GOOD);
 	}
 
 }
