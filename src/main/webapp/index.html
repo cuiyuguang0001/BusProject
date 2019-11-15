@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="assets/css/layui.css">
+		<link rel="stylesheet" href="assets/css/admin.css">
+		<link rel="icon" href="/favicon.ico">
+		<title>联通班车路线优化系统</title>
+	</head>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header custom-header">
+
+				<ul class="layui-nav layui-layout-left">
+					<li class="layui-nav-item slide-sidebar" lay-unselect>
+						<a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
+					</li>
+				</ul>
+
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">欢迎您</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;">我</a>
+						<dl class="layui-nav-child">
+							<dd><a href="">注销</a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+
+			<div class="layui-side custom-admin">
+				<div class="layui-side-scroll">
+
+					<div class="custom-logo">
+						<img src="assets/images/ME.jpg" alt="" />
+						<h1>联想班车路线优化</h1>
+					</div>
+					<ul id="Nav" class="layui-nav layui-nav-tree">
+						<li class="layui-nav-item">
+							<a href="javascript:;">
+								<i class="layui-icon">&#xe609;</i>
+								<em>用户管理</em>
+							</a>
+							<dl class="layui-nav-child">
+								<dd><a href="views/用户信息.html">用户信息</a></dd>
+								<dd><a href="views/用户权限.html">用户权限</a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;">
+								<i class="layui-icon">&#xe716;</i>
+								<em>车辆管理</em>
+							</a>
+							<dl class="layui-nav-child">
+								<dd><a href="views/车辆信息.html">车辆信息</a></dd>
+								<dd><a href="views/车辆年检审核.html">车辆年检审核</a></dd>
+								<dd><a href="views/车辆保险审核.html">车辆保险审核</a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;">
+								<i class="layui-icon">&#xe606;</i>
+								<em>线路管理</em>
+							</a>
+							<dl class="layui-nav-child">
+								<dd><a href="views/线路查看.html">线路查看</a></dd>
+								<dd><a href="views/线路安排.html">线路安排</a></dd>
+								<dd><a href="views/线路优化.html">线路优化</a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;">
+								<i class="layui-icon">&#xe770;</i>
+								<em>司机管理</em>
+							</a>
+							<dl class="layui-nav-child">
+								<dd><a href="views/司机信息.html">司机信息</a></dd>
+								<dd><a href="views/驾驶证信息.html">驾驶证信息</a></dd>
+								<dd><a href="views/日志表.html">日志表</a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;">
+								<i class="layui-icon">&#xe857;</i>
+								<em>站点管理</em>
+							</a>
+							<dl class="layui-nav-child">
+								<dd><a href="views/站点信息.html">站点信息</a></dd>
+								<dd><a href="views/站点变更申请.html">站点变更申请</a></dd>
+							</dl>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+
+			<div class="layui-body">
+				<div class="layui-tab app-container" lay-allowClose="true" lay-filter="tabs">
+					<ul id="appTabs" class="layui-tab-title custom-tab"></ul>
+					<div id="appTabPage" class="layui-tab-content"></div>
+				</div>
+			</div>
+
+			<div class="layui-footer">
+				<p>© 2018 更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+			</div>
+
+			<div class="mobile-mask"></div>
+		</div>
+		<script src="assets/layui.js"></script>
+		<script src="index.js" data-main="home"></script>
+	</body>
+</html>
