@@ -40,7 +40,11 @@
 
   <dependencies>
 
-
+    <dependency>
+      <groupId>self.mybatis.factory</groupId>
+      <artifactId>mybatis-factory</artifactId>
+      <version>1.0</version>
+    </dependency>
 
 
     <dependency>
