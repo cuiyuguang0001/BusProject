@@ -15,8 +15,8 @@ public class Bus_jobService{
 	@Autowired
 	Bus_jobMapper bus_jobMapper;
 
-	public Map<String, Object> bus_jobList(Map<String, Object> map){
-		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_jobMapper.bus_jobQuery(map), 0);
+	public Map<String, Object> bus_jobList(){
+		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_jobMapper.bus_jobQuery(), 0);
 	}
 
 	public Map<String, Object> bus_jobAdd(Bus_job bus_job){

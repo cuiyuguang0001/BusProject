@@ -26,7 +26,7 @@ public class Bus_uploadorderService{
 		map.put("page", pageUtil);
 		List<Bus_uploadorder> bus_users = bus_uploadorderMapper.bus_uploadorderList(map);
 		for(Bus_uploadorder b : bus_users)
-			b.setTime(CommitUtil.getShortTime(b.getTime()));
+			b.setTime(CommitUtil.timestampToStr(Long.valueOf(b.getTime())));
 		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_users, pageUtil.getCount());
 	}
 

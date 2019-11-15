@@ -12,7 +12,7 @@ public interface Bus_userMapper{
 	@Select("select id, name, age, sex, job, sal, joinDate from bus_user where name like concat(ifNull(#{name}, ''), '%')")
 	List<Bus_user> bus_userList(Map<String, Object> map);
 
-	@Insert("insert into bus_user(name, age, sex, job, sal, joinDate) values(#{name}, #{age}, #{sex}, #{job}, #{sal}, #{joinDate}")
+	@Insert("insert into bus_user(name, age, sex, job, sal, joinDate) values(#{name}, #{age}, #{sex}, #{job}, #{sal}, #{joinDate})")
 	boolean bus_userAdd(Bus_user bus_user);
 
 	@Update("update bus_user set name = #{name}, age = #{age}, sex = #{sex}, job = #{job}, sal = #{sal} where id = #{id}")

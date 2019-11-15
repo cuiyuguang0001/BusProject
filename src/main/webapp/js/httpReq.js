@@ -1,6 +1,6 @@
-document.write("<script src=\"../assets/layui.all.js\"></script>");
+document.write("<script src=\"../assets/layui/layui.all.js\"></script>");
 document.write("<script language=javascript src='../jQuery/jquery-3.4.1.min.js'></script>");
-document.write("<link rel=\"stylesheet\" href=\"../assets/css/layui.css\">");
+document.write("<link rel=\"stylesheet\" href=\"../assets/layui/css/layui.css\">");
 
 var user = {
     defaultUrl:'http://localhost:9010'
@@ -12,34 +12,17 @@ var myurl = {
     userAdd: '/bus_user/add',//添加 参数 name,age,sex,sal,post
     userEdit: '/bus_user/edit',//修改 参数 id name age sex sal post
     userDel: '/bus_user/del',//删除 参数 id
-    //登陆
-    login: '/user/login', //参数 username pwd
-    //boat表操作
-    boatList: '/boat/boatList',
-    boatAdd: '/boat/boatAdd',//添加 参数 name money people(int)
-    boatEdit: '/boat/boatEdit',//修改 参数 name money people(int)
-    boatDel: '/boat/boatDel',//删除 参数 id
-    //dingdan表操作
-    dingdanList: '/dingdan/dingdanList',
-    dingdanAdd: '/dingdan/dingdanAdd',//添加 参数 type name num util
-    dingdanDel: '/dingdan/dingdanDel',//删除 参数 id
-    //kucun表操作
-    kucunList: '/kucun/kucunList',
-    //plan表操作
-    planList: '/plan/planList',
-    planAdd: '/plan/planAdd',//添加 参数 type people(int) boat(int) oil
-    planEditStatus: '/plan/planEditStatus',//修改状态 参数 status id
-    planDel: '/plan/planDel',//删除 参数 id
-    //weixiu表操作
-    weixiuList:'/weixiu/weixiuList',
-    weixiuAdd:'/weixiu/weixiuAdd',
-    weixiuEditStatus:'/weixiu/weixiuEditStatus',
-    weixiuDel:'/weixiu/weixiuDel',
-    //tuolun表操作
-    tuolunList:'/tuolun/tuolunList',
-    tuolunAdd:'/tuolun/tuolunAdd',
-    tuolunEditStatus:'/tuolun/tuolunEditStatus',
-    tuolunDel:'/tuolun/tuolunDel'
+    //job表
+    jobList: '/bus_job/list',
+    jobAdd: '/bus_job/add',
+    jobEdit: '/bus_job/edit',
+    jobDel: '/bus_job/del',
+    //bus表
+    bus_busList: '/bus_bus/list',
+    bus_busAdd: '/bus_bus/add',
+    bus_busEdit: '/bus_bus/edit',
+    bus_busDel: '/bus_bus/del/',
+
 }
 
 var req = {
@@ -57,10 +40,6 @@ var req = {
                 r = data;
             }
         })
-        if(r == null)
-        {
-            r == '404:数据请求失败'
-        }
         return r;
     }
 }
@@ -108,11 +87,11 @@ var common = {
                 case 'radio':{
                     $('#' + data.form).append("<div class='layui-form-item'>\n" +
                         "<label class='layui-form-label'>"+ data[key].title +"</label>\n" +
-                        "<div class='layui-input-block' id='myRadio-"+  myId +"'>\n" +
+                        "<div class='layui-input-block' id='"+  myId +"'>\n" +
                         "</div>\n" + "</div>\n")
                     for(let i = 0; i < data[key].value.length; i++)
                     {
-                        $('#myRadio-'+  myId).append("<input type='"+ data[key].type +"' name='" + key + "' value='"+ data[key].value[i] +"' id='"+  data.form + "_" + key +"' title='" + data[key].radioTitle[i] + "'/>\n")
+                        $('#'+  myId).append("<input type='"+ data[key].type +"' name='" + key + "' value='"+ data[key].value[i] +"' id='"+  data.form + "_" + key +"' title='" + data[key].radioTitle[i] + "'/>\n")
                     }
                     break;
                 }
@@ -136,11 +115,11 @@ var common = {
         }
 
 
-        $('#' + data.form).append("<div class='layui-form-item'>\n" +
-            "<button id='Yes' style='position: absolute; margin-left:80px; margin-bottom: 15px;' class='layui-btn' lay-submit \n" +
-            "lay-filter='" + data.button.submitFilter + "' onclick='" + data.button.submitClick + "'>" + data.button.submit + "</button>\n" +
-            "<button id='No' type='button' style='position: absolute; margin-left:360px; margin-bottom: 15px; background:red' class='layui-btn' onclick='" + data.button.backClick + "'>" + data.button.back + "</button>\n" +
-            "</div>")
+        // $('#' + data.form).append("<div class='layui-form-item'>\n" +
+//         //     "<button id='Yes' style='position: absolute; margin-left:80px; margin-bottom: 15px;' class='layui-btn' lay-submit \n" +
+//         //     "lay-filter='" + data.button.submitFilter + "' onclick='" + data.button.submitClick + "'>" + data.button.submit + "</button>\n" +
+//         //     "<button id='No' type='button' style='position: absolute; margin-left:360px; margin-bottom: 15px; background:red' class='layui-btn' onclick='" + data.button.backClick + "'>" + data.button.back + "</button>\n" +
+//         //     "</div>")
         form.render()
     },
 
@@ -151,5 +130,14 @@ var common = {
             },
             where:data,
         })
+    },
+    initSelect: (url, data, id) =>{
+        $("#" + id).empty()
+        var data = req.post(url,data,false)
+        for(let i = 0; i < data.data.length; i++)
+        {
+            $("#" + id).append("<option value = '"+ data.data[i].name +"'>"+ data.data[i].name +"</option>")
+        }
+        form.render()
     }
 }

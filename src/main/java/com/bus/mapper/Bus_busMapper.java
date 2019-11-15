@@ -12,7 +12,7 @@ public interface Bus_busMapper{
 	@Select("select id, name, norms, buyTime, uploadTime, state from bus_bus where state = 1 and name like concat(ifNull(#{name}, ''), '%')")
 	List<Bus_bus> bus_busList(Map<String, Object> map);
 
-	@Insert("insert into bus_bus(name, norms, buyTime, uploadTime, state) values(#{name}, #{norms}, #{buyTime}, 0, 1")
+	@Insert("insert into bus_bus(name, norms, buyTime, uploadTime, state) values(#{name}, #{norms}, #{buyTime}, 0, 1)")
 	boolean bus_busAdd(Bus_bus bus_bus);
 
 	@Update("update bus_bus set name = #{name}, norms = #{norms}, state = #{state} where id = #{id}")

@@ -23,7 +23,7 @@ public class Bus_driverService{
 		map.put("page", pageUtil);
 		List<Bus_driver> bus_users = bus_driverMapper.bus_driverList(map);
 		for(Bus_driver b : bus_users){
-			b.setTime(CommitUtil.getShortTime(b.getTime()));
+			b.setTime(CommitUtil.timestampToStr(Long.valueOf(b.getTime())));
 		}
 		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_users, pageUtil.getCount());
 	}

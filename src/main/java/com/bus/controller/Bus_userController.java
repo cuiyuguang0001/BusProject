@@ -26,12 +26,12 @@ public class Bus_userController{
 	}
 
 	@PostMapping("edit")
-	public Map<String, Object> bus_userEdit(Bus_user bus_user){
+	public Map<String, Object> bus_userEdit(@RequestBody Bus_user bus_user){
 		return bus_userService.bus_userEdit(bus_user);
 	}
 
 	@PostMapping("del")
-	public Map<String, Object> bus_userDel(Bus_user bus_user){
+	public Map<String, Object> bus_userDel(@RequestBody Bus_user bus_user){
 		return bus_userService.bus_userDel(bus_user);
 	}
 

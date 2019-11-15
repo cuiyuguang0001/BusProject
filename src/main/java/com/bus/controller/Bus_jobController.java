@@ -16,8 +16,8 @@ public class Bus_jobController{
 	Bus_jobService bus_jobService;
 
 	@PostMapping("list")
-	public Map<String, Object> bus_jobList(@RequestBody Map<String, Object> map){
-		return bus_jobService.bus_jobList(map);
+	public Map<String, Object> bus_jobList(){
+		return bus_jobService.bus_jobList();
 	}
 
 	@PostMapping("add")
