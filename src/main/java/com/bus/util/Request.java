@@ -24,6 +24,7 @@ public class Request extends HashMap<String, Object> {
     public Request error(String msg){
         put("msg", msg);
         put("ref", Constant.ERROR);
+        return this;
     }
 
 }
