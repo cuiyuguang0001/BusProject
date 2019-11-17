@@ -43,7 +43,7 @@ table.render({
         , {field: 'brithday', title: '出生日期', align: 'center'}
         , {field: 'time',     title: '添加日期', align: 'center'}
         , {field: 'state',    title: '审核状态',align: 'center', templet: '#manager_state'}
-        , {fixed: 'right',    title: '操作', toolbar: '#barDemo',  align: 'center'}
+        , {fixed: 'right',    title: '操作',width:'20%', toolbar: '#barDemo',  align: 'center'}
     ]],
     /**
      * 回调函数
@@ -134,6 +134,42 @@ table.render({
             }]
         });
         /**
+         * 添加日志
+         */
+        common.form({
+            form: 'log',
+            id:{
+                title:'ID',
+                type:'text',
+                verify:'required',
+                class:'layui-btn-disabled',
+                disable:true,
+            }, name:{
+                title:'车主姓名',
+                type:'text',
+                verify:'required',
+                class:'layui-btn-disabled',
+                disable:true,
+            }, busName:{
+                title:'车名',
+                type:'text',
+                verify:'required'
+            },title:{
+                title:'标题',
+                type:'text',
+                verify:'required',
+            },text:{
+                title:'内容',
+                type:'textarea',
+                verify:'',
+            },button:[{
+                buttonFilter:'submit',
+                buttonName:'添加日志',
+                class:'layui-btn-lg layui-btn-fluid',
+                submit:true
+            }]
+        });
+        /**
          * 日起渲染
          */
 
@@ -187,6 +223,27 @@ table.on('tool(driverData)', function(obj){
             area: ['34%', '70%'],
             content: $(".update").append(),
         });
+    } else if(obj.event === 'log'){
+        form.val('log', {
+            id: data.id,
+            name: data.name
+        });
+        index = layer.open({
+            type: 1,
+            title: '车辆信息',
+            closeBtn: false,
+            shade: 0.5,
+            id: 'busUpdate', //设定一个id，防止重复弹出,
+            btn:['取消操作'],
+            btn1:function(index, layero){
+                layer.close(index);
+                $(".log").css("display", "none");
+                return false;
+            },
+            btnAlign: 'c',
+            area: ['100%', '100%'],
+            content: $(".log").append(),
+        });
     }
 })
 
@@ -230,5 +287,14 @@ form.on('submit(update)', function (data) {
     layer.close(index);
     $(".update").css("display", "none");
     table.reload('driverData');
+    return false;
+})
+/**
+ * 添加日志
+ */
+form.on('submit(log)', function (data) {
+    req.post(myurl.bug_logAdd, form.val('log'), false);
+    layer.close(index);
+    $(".log").css("display", "none");
     return false;
 })

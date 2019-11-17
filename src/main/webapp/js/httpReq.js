@@ -36,6 +36,11 @@ var myurl = {
     Bus_jszEdit:'/bus_jsz/edit',
     Bus_jszAdd:'/bus_jsz/add',
     Bus_jszDel:'/bus_jsz/del',
+    //bug_log表
+    bug_logList:'/bug_log/list',
+    bug_logAdd:'/bug_log/add',
+    bug_logDel:'/bug_log/del',
+
 
 }
 var req = {
@@ -93,7 +98,7 @@ var common = {
                 case 'text':{
                     $('#' + data.form).append("<div class='layui-form-item'>\n" +
                         "<label class='layui-form-label'>"+ data[key].title +"</label>\n" +
-                        "<div class='layui-input-inline '>\n" +
+                        "<div class='layui-input-block '>\n" +
                         "<input type='"+ data[key].type +"' id='"+  myId +"' name='" + key + "' " +
                         "lay-verify='"+ data[key].verify +"' autocomplete='off' "+ (data[key].verify == "required" ? "required" : "") +"\n" +
                         "class='layui-input'/>" +
@@ -114,7 +119,7 @@ var common = {
                 case 'select':{
                     $('#' + data.form).append("<div class='layui-form-item'>\n" +
                         "<label class='layui-form-label'>"+ data[key].title +"</label>\n" +
-                        "<div class='layui-input-inline '>\n" +
+                        "<div class='layui-input-block '>\n" +
                         "<select id='"+  myId +"' name='" + key + "' lay-verify='" + data[key].verify + "'></select>" +
                         "</div>\n" + "</div>\n")
                     for(let key2 in data[key].data)
@@ -127,8 +132,8 @@ var common = {
                 case 'textarea':{
                     $('#' + data.form).append("<div class='layui-form-item'>\n" +
                         "<label class='layui-form-label'>"+ data[key].title +"</label>\n" +
-                        "<div class='layui-input-inline '>\n" +
-                        "<<textarea name='" + key + "' lay-verify='" + data[key].verify + "' placeholder='" + data[key].placeholder == null ? '' : data[key].placeholder + "' class='layui-textarea'></textarea>" +
+                        "<div class='layui-input-block '>\n" +
+                        "<textarea id='"+  myId +"' name='" + key + "' lay-verify='" + data[key].verify + "'  class='layui-textarea'></textarea>" +
                         "</div>\n" + "</div>\n")
                     break;
                 }

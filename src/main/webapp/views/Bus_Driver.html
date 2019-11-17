@@ -22,8 +22,10 @@
             </div>
             <button  class="layui-btn" data-type="reload" onclick="common.reload('driverData', {name:$('#select').val()})">搜索</button>
             <script type="text/html" id="barDemo">
-                <a class="layui-btn layui-btn-xs layui-btn-normal" style="width: 35%" lay-event="update">编辑</a>
-                <a class="layui-btn layui-btn-danger layui-btn-xs" style="width: 35%" lay-event="del">删除</a>
+                <a class="layui-btn layui-btn-xs  layui-btn-radius" style="width: 25%" lay-event="update">编辑</a>
+<!--                <a class="layui-btn layui-btn-xs layui-btn-danger" style="width: 25%" lay-event="del">删除</a>-->
+                <a class="layui-btn layui-btn-xs layui-btn-normal layui-btn-radius" style="width: 25%" lay-event="log">日志</a>
+                <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-danger" style="width: 25%" lay-event="del"><i class="layui-icon"></i></button>
             </script>
         </div>
         <table class="layui-hide" id="driverData" lay-filter="driverData"></table>
@@ -41,6 +43,12 @@
             </fieldset>
             <form id="update" class="layui-form layui-form-pane" lay-filter="update" action=""></form>
         </div>
+    <div class="log" style="display: none; border-radius:15px; padding:10px; padding-left:40px; padding-right:40px; ">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>编辑日志</legend>
+        </fieldset>
+        <form id="log" class="layui-form layui-form-pane" lay-filter="log" action=""></form>
+    </div>
     </body>
     <script src="../js/Bus_Driver.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/html" id="manager_state">
