@@ -138,15 +138,18 @@ var common = {
                 $('#' + myId).attr('disabled', "")
         }
 
-
-        $('#' + data.form).append("<div id='button_"+ data.form +"' class='layui-btn-container' style='margin-top:30px'>\n" +
-            "</div>")
-        for(let i = 0; i < data.button.length; i++)
+        if(data.button != null)
         {
-            console.log(data.button[i].buttonFilter)
-            //id='"+ data.button[i].id +"'
-            $('#button_' + data.form).append("<button class='layui-btn "+ (data.button[i].class == 'undefined' ? '' : data.button[i].class) +"' "+ (data.button[i].submit==true||null?'lay-submit':'') +" lay-filter='" + data.button[i].buttonFilter + "'>" + data.button[i].buttonName + "</button>\n")
+            $('#' + data.form).append("<div id='button_"+ data.form +"' class='layui-btn-container' style='margin-top:30px'>\n" +
+                "</div>")
+            for(let i = 0; i < data.button.length; i++)
+            {
+                console.log(data.button[i].buttonFilter)
+                //id='"+ data.button[i].id +"'
+                $('#button_' + data.form).append("<button class='layui-btn "+ (data.button[i].class == 'undefined' ? '' : data.button[i].class) +"' "+ (data.button[i].submit==true||null?'lay-submit':'') +" lay-filter='" + data.button[i].buttonFilter + "'>" + data.button[i].buttonName + "</button>\n")
+            }
         }
+
 
         form.render()
     },
