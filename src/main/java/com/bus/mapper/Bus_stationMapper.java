@@ -9,13 +9,13 @@ import java.util.Map;
 @Mapper
 public interface Bus_stationMapper {
 
-	@Select("select id, busName, pointOne, pointTwo, state from bus_station")
+	@Select("select id, busName, pointOne, pointTwo, state from bus_station where state = #{state} and busName like concat(ifNull(#{busName}, ''), '%')")
 	List<Bus_station> bus_stationList(Map<String, Object> map);
 
 	@Insert("insert into bus_station(busName, pointOne, pointTwo, state) values(#{busName}, #{pointOne}, #{pointTwo}, #{state})")
 	boolean bus_stationAdd(Bus_station bus_station);
 
-	@Update("update bus_station set state = #{state} where id = #{id}")
+	@Update("update bus_station set pointOne = #{pointOne}, pointTwo = #{pointTwo}, state = #{state} where busName = #{busName}")
 	boolean bus_stationEdit(Bus_station bus_station);
 
 	@Delete("delete from bus_station where id = #{id}")
