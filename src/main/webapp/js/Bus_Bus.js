@@ -39,8 +39,8 @@ table.render({
         , {field: 'norms', width: '12%', title: '型号', sort: true, align: 'center'}
         , {field: 'buyTime', width: '18%', title: '购买时间', align: 'center'}
         , {field: 'uploadTime', title: '最后维修时间', width: '18%', minWidth: 100, align: 'center'}
-        , {field: 'state', title: '启用状态', width: '20%', align: 'center', templet:'#manager_state'}
-        , {fixed: 'right', title: '操作', toolbar: '#barDemo',  align: 'center'}
+        , {field: 'state', title: '启用状态', width: '14%', align: 'center', templet:'#manager_state'}
+        , {fixed: 'right', title: '操作', width: '18%', toolbar: '#barDemo',  align: 'center'}
     ]],
     /**
      * 回调函数
@@ -161,6 +161,16 @@ table.on('tool(busData)', function(obj){
             content: $(".update").append(),
             // id: "alertcenterdiv",
         });
+    } else if(obj.event === 'selectRoad'){
+        layer.open({
+            type: 2,
+            title:'查看地图规划',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['100%', '100%'],
+            content: 'Bus_Way.html?name=' + data.name,
+        })
     }
 })
 function insert() {

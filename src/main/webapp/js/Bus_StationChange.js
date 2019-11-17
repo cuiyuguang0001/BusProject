@@ -76,3 +76,19 @@ table.on('tool(driverData)', function(obj){
         });
     }
 })
+
+function insert(){
+    layer.open({
+        type: 2,
+        title:'查看地图规划',
+        shadeClose: true,
+        shade: false,
+        maxmin: true, //开启最大化最小化按钮
+        area: ['100%', '100%'],
+        content: 'Bus_Way.html?name=add',
+        cancel: function(index, layero) {
+            layer.close(index);
+            table.reload('driverData')
+        }
+    })
+}

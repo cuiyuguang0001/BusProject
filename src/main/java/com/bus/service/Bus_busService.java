@@ -27,7 +27,8 @@ public class Bus_busService{
 		List<Bus_bus> bus_users = bus_busMapper.bus_busList(map);
 		for(Bus_bus b : bus_users){
 			b.setBuyTime(CommitUtil.timestampToStr(Long.valueOf(b.getBuyTime())));
-			b.setUploadTime(CommitUtil.timestampToStr(Long.valueOf(b.getUploadTime())));
+			b.setUploadTime(b.getUploadTime().equals("0")
+					? "未维修" : CommitUtil.timestampToStr(Long.valueOf(b.getUploadTime())));
 		}
 		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_users, pageUtil == null ? 0 : pageUtil.getCount());
 	}

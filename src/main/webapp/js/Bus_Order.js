@@ -85,13 +85,13 @@ table.on('tool(busType)', function(obj){
     var data = obj.data;
     if(obj.event === 'del'){
         layer.confirm('确认驳回么', function(index){
-            req.post(myurl.bus_uploadorderEdit, {id: data.id, name: data.name, state: 2} , false)
+            req.post(myurl.bus_uploadorderEdit, {id: data.id, busname: data.busname, state: 2} , false)
             layer.close(index);
             table.reload('busType');
         });
     }else if(obj.event === 'update'){
         layer.confirm('确定通过么', function(index){
-            req.post(myurl.bus_uploadorderEdit, {id: data.id, name: data.name, state: 1} , false)
+            req.post(myurl.bus_uploadorderEdit, {id: data.id, busname: data.busname, state: 1} , false)
             layer.close(index);
             table.reload('busType');
         });

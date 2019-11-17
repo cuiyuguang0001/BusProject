@@ -21,11 +21,30 @@
         width: 100%;
         float: left;
     }
+    #panel {
+        position: fixed;
+        background-color: white;
+        max-height: 90%;
+        overflow-y: auto;
+        top: 10px;
+        right: 10px;
+        width: 280px;
+    }
+    #panel .amap-call {
+        background-color: #009cf9;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    #panel .amap-lib-driving {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        overflow: hidden;
+    }
 </style>
 <body>
 <div id="container" class="map"></div>
-<div id="panel"></div>
-<div class="info">
+<div id="panel" style="float:left;position: absolute"></div>
+<div class="info" style="margin-right: 40%">
     <div class="input-item">
         <div class="input-item-prepend">
             <span class="input-item-text" style="width:8rem;">请输入关键字</span>
@@ -33,8 +52,8 @@
         <input id='tipinput' type="text">
     </div>
 </div>
-<div class="input-card">
-    <h4>起始点(点击下方输入框进行绑定)：</h4>
+<div class="input-card" style="margin-right: 78%;">
+    <h4 id="target">起始点(点击下方输入框进行绑定)：</h4>
     <div class="input-item">
         <input type="text" readonly="true" id="start" onclick="change(false)">
     </div>
@@ -44,7 +63,6 @@
     </div>
     <div class="layui-btn-container" style="margin-top: 10px">
         <button  class="layui-btn" data-type="reload" onclick="driveWay()">开始规划</button>
-        <button  class="layui-btn" data-type="reload" onclick="submitWay()">提交规划</button>
     </div>
 </div>
 
@@ -52,11 +70,19 @@
 <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script type="text/javascript">
 
+    var startPoint = QueryString();
     var startMark = null;
     var endMark = null;
     var driving = null;
-    var endflag = false
+    var endflag = false;
+    var onButton = false;
 
+    if(startPoint[0] === 'add'){
+        $('#target').before("<h4>请输入申请车牌号</h4>\n" +
+            "    <div class=\"input-item\">\n" +
+            "        <input type=\"text\" id=\"busname\">\n" +
+            "    </div>")
+    }
 
     var map = new AMap.Map("container", {
         resizeEnable: true,
@@ -108,11 +134,38 @@
             driving.search($('#start').val().split(','), $('#end').val().split(','), function(status, result) {
                 if (status === 'complete') {
                     log.success('线路规划已完成')
+                    if(!onButton && startPoint[0] != null){
+                        $('.layui-btn-container').append("<button  class=\"layui-btn\" data-type=\"reload\" onclick=\"submitWay()\">提交规划</button>")
+                        onButton = true;
+                    }
+
+
+
                 } else {
                     log.error('线路规划失败：' + result)
                 }
             })
 
+    }
+
+    function submitWay(){
+        let reqData = {}
+        if(startPoint[0] === 'add'){
+            reqData = {
+                busName:$('#busname').val(),
+                pointOne:$('#start').val(),
+                pointTwo:$('#end').val(),
+                state:0
+            }
+        }else {
+            reqData = {
+                busName:startPoint[0],
+                pointOne:$('#start').val(),
+                pointTwo:$('#end').val(),
+                state:1
+            }
+        }
+        req.post(myurl.bus_stationAdd, reqData, false)
     }
 
     function select(e) {
@@ -123,6 +176,16 @@
     }
     function change(e){
         endflag = e
+    }
+    function QueryString(item){
+
+        var str = location.search.substr( 1 ); //substr()方法返回从参数值开始到结束的字符串；
+        var theRequest  = []
+        var strs = str.split( "&" );
+        for ( var i = 0; i < strs.length; i++ ) {
+            theRequest[i] = ( strs[ i ].split( "=" )[ 1 ] );
+        }
+        return theRequest
     }
 
 </script>

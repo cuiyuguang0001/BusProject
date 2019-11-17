@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <title>layout 后台大布局 - Layui</title>
     <script src="../js/httpReq.js" type="text/javascript" charset="utf-8"></script>
-
-
 </head>
 <body>
 <!-- 内容主体区域 -->
@@ -22,8 +20,9 @@
     </div>
     <button  class="layui-btn" data-type="reload" onclick="common.reload('busData', {name:$('#select').val()})">搜索</button>
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" style="width: 35%" lay-event="update">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" style="width: 35%" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-xs layui-btn-normal" style="width: 16%" lay-event="update">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" style="width: 16%" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-warm layui-btn-xs " style="width: 28%" lay-event="selectRoad">线路规划</a>
     </script>
 </div>
 <table class="layui-hide" id="busData" lay-filter="busData"></table>

@@ -39,7 +39,7 @@ public class Bus_uploadorderService{
 
 	public Map<String, Object> bus_uploadorderEdit(Bus_uploadorder bus_uploadorder){
 		if(bus_uploadorder.getState() == 1)
-			if(bus_busMapper.bus_busUpdateTime(CommitUtil.getTineLine(), bus_uploadorder.getBusname()))
+			if(!bus_busMapper.bus_busUpdateTime(CommitUtil.getTineLine(), bus_uploadorder.getBusname()))
 				return new Request().error(Constant.ERROR_MSG);
 		if(!bus_uploadorderMapper.bus_uploadorderEdit(bus_uploadorder))
 			return new Request().error(Constant.ERROR_MSG);

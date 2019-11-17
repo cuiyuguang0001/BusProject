@@ -39,7 +39,7 @@ table.render({
         {field: 'id',         width: '6%', title: 'ID', sort: true, align: 'center', fixed: true}
         , {field: 'name',     title: '姓名 ',width:'12%', align: 'center'}
         , {field: 'age',      title: '年龄', width:'10%', align: 'center'}
-        , {field: 'sfz',      title: '身份证', width:'16%', align: 'center'}
+        , {field: 'sfz',      title: '驾驶证号', width:'16%', align: 'center'}
         , {field: 'brithday', title: '出生日期', align: 'center'}
         , {field: 'time',     title: '添加日期', align: 'center'}
         , {field: 'state',    title: '审核状态',align: 'center', templet: '#manager_state'}
@@ -67,7 +67,7 @@ table.render({
                 type:'text',
                 verify:'number'
             },sfz:{
-                title:'身份证',
+                title:'驾驶证号',
                 type:'text',
                 verify:'number'
             },
@@ -103,7 +103,7 @@ table.render({
                 type:'text',
                 verify:'required'
             }, sfz:{
-                title:'身份证',
+                title:'驾驶证号',
                 type:'text',
                 verify:'required',
                 class:'layui-btn-disabled',
