@@ -107,9 +107,9 @@
 
             driving.search($('#start').val().split(','), $('#end').val().split(','), function(status, result) {
                 if (status === 'complete') {
-                    log.success('绘制驾车路线完成')
+                    log.success('线路规划已完成')
                 } else {
-                    log.error('获取驾车数据失败：' + result)
+                    log.error('线路规划失败：' + result)
                 }
             })
 

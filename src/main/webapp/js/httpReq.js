@@ -124,6 +124,14 @@ var common = {
                     }
                     break;
                 }
+                case 'textarea':{
+                    $('#' + data.form).append("<div class='layui-form-item'>\n" +
+                        "<label class='layui-form-label'>"+ data[key].title +"</label>\n" +
+                        "<div class='layui-input-inline '>\n" +
+                        "<<textarea name='" + key + "' lay-verify='" + data[key].verify + "' placeholder='" + data[key].placeholder == null ? '' : data[key].placeholder + "' class='layui-textarea'></textarea>" +
+                        "</div>\n" + "</div>\n")
+                    break;
+                }
             }
             $('#' + myId).addClass(data[key].class)
             if(data[key].disable == true)
