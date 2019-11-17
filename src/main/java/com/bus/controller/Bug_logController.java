@@ -3,9 +3,7 @@ package com.bus.controller;
 import com.bus.pojo.Bug_log;
 import com.bus.service.Bug_logService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -17,20 +15,19 @@ public class Bug_logController {
 	@Autowired
 	Bug_logService bug_logService;
 
-	public Map<String, Object> bug_logList(Bug_log bug_log){
-		return null;
+	@PostMapping("list")
+	public Map<String, Object> bug_logList(@RequestBody Map<String, Object> map){
+		return bug_logService.bug_logList(map);
 	}
 
-	public Map<String, Object> bug_logAdd(Bug_log bug_log){
-		return null;
+	@PostMapping("add")
+	public Map<String, Object> bug_logAdd(@RequestBody Bug_log bug_log){
+		return bug_logService.bug_logAdd(bug_log);
 	}
 
-	public Map<String, Object> bug_logEdit(Bug_log bug_log){
-		return null;
-	}
-
-	public Map<String, Object> bug_logDel(Bug_log bug_log){
-		return null;
+	@PostMapping("del")
+	public Map<String, Object> bug_logDel(@RequestBody Bug_log bug_log){
+		return bug_logService.bug_logDel(bug_log);
 	}
 
 }

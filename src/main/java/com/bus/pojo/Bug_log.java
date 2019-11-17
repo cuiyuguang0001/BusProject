@@ -8,7 +8,7 @@ public class Bug_log {
 	//车名
 	private String busName;
 	//填写日期
-	private int createDate;
+	private String createDate;
 	//内容
 	private String text;
 	//标题
@@ -38,11 +38,11 @@ public class Bug_log {
 		this.busName=busName;
 	}
 
-	public int getCreateDate(){
+	public String getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(int createDate){
+	public void setCreateDate(String createDate){
 		this.createDate=createDate;
 	}
 
