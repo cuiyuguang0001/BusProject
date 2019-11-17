@@ -40,6 +40,11 @@ var myurl = {
     bug_logList:'/bug_log/list',
     bug_logAdd:'/bug_log/add',
     bug_logDel:'/bug_log/del',
+    //bus_station表
+    bus_stationList:'/bus_station/list',
+    bus_stationAdd:'/bus_station/add',
+    bus_stationEdit:'/bus_station/edit',
+
 
 
 }

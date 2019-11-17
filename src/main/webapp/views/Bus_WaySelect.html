@@ -32,9 +32,7 @@
 <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script type="text/javascript">
 
-    var startPoint = QueryString('startPoint');
-    var endPoint = QueryString('endPoint');
-
+    var startPoint = QueryString();
 
 
     var map = new AMap.Map("container", {
@@ -53,21 +51,24 @@
         })
     })
 
-    driving.clear()
-
-    driving.search(startPoint.split(','), endPoint.split(','), function(status, result) {
+    driving.search(startPoint[0].split(','), startPoint[1].split(','), function(status, result) {
         if (status === 'complete') {
-            log.success('线路规划已完成')
+            log.success('成功查看线路！')
         } else {
             log.error('线路规划失败：' + result)
         }
     })
 
     function QueryString(item){
-        let sValue=location.search.match(new RegExp("[/?/&]"+item+"=([^/&]*)(/&?)","i"))
-        return sValue?sValue[1]:sValue
-    }
 
+        var str = location.search.substr( 1 ); //substr()方法返回从参数值开始到结束的字符串；
+        var theRequest  = []
+        var strs = str.split( "&" );
+        for ( var i = 0; i < strs.length; i++ ) {
+            theRequest[i] = ( strs[ i ].split( "=" )[ 1 ] );
+        }
+        return theRequest
+    }
 </script>
 </body>
 </html>
