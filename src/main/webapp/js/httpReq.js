@@ -22,11 +22,24 @@ var myurl = {
     bus_busAdd: '/bus_bus/add',
     bus_busEdit: '/bus_bus/edit',
     bus_busDel: '/bus_bus/del/',
+    //uploadorder表
+    bus_uploadorderList:'/bus_uploadorder/list',
+    bus_uploadorderAdd: '/bus_uploadorder/add',
+    bus_uploadorderEdit:'/bus_uploadorder/edit',
+    //bus_driver表
+    bus_driverList:'/bus_driver/list',
+    bus_driverAdd:'/bus_driver/add',
+    bus_driverEdit:'/bus_driver/edit',
+    bus_driverDel:'/bus_driver/del',
+    //bus_jsz表
+    bus_jszList:'/bus_jsz/list',
+    Bus_jszEdit:'/bus_jsz/edit',
+    Bus_jszAdd:'/bus_jsz/add',
+    Bus_jszDel:'/bus_jsz/del',
 
 }
-
 var req = {
-    post: function (url,data,async) {
+    post: function (url,data,async,msg = true) {
         r = null;
         $.ajax({
             url: user.defaultUrl + url,
@@ -38,6 +51,9 @@ var req = {
             async: async == null ? false : async,
             success: function(data){
                 r = data;
+                if(msg){
+                    layer.msg(r.msg)
+                }
             }
         })
         return r;
@@ -87,7 +103,7 @@ var common = {
                 case 'radio':{
                     $('#' + data.form).append("<div class='layui-form-item'>\n" +
                         "<label class='layui-form-label'>"+ data[key].title +"</label>\n" +
-                        "<div class='layui-input-block' id='"+  myId +"'>\n" +
+                        "<div class='layui-input-block'  id='"+  myId +"'>\n" +
                         "</div>\n" + "</div>\n")
                     for(let i = 0; i < data[key].value.length; i++)
                     {
@@ -115,11 +131,15 @@ var common = {
         }
 
 
-        // $('#' + data.form).append("<div class='layui-form-item'>\n" +
-//         //     "<button id='Yes' style='position: absolute; margin-left:80px; margin-bottom: 15px;' class='layui-btn' lay-submit \n" +
-//         //     "lay-filter='" + data.button.submitFilter + "' onclick='" + data.button.submitClick + "'>" + data.button.submit + "</button>\n" +
-//         //     "<button id='No' type='button' style='position: absolute; margin-left:360px; margin-bottom: 15px; background:red' class='layui-btn' onclick='" + data.button.backClick + "'>" + data.button.back + "</button>\n" +
-//         //     "</div>")
+        $('#' + data.form).append("<div id='button_"+ data.form +"' class='layui-btn-container' style='margin-top:30px'>\n" +
+            "</div>")
+        for(let i = 0; i < data.button.length; i++)
+        {
+            console.log(data.button[i].buttonFilter)
+            //id='"+ data.button[i].id +"'
+            $('#button_' + data.form).append("<button class='layui-btn "+ (data.button[i].class == 'undefined' ? '' : data.button[i].class) +"' "+ (data.button[i].submit==true||null?'lay-submit':'') +" lay-filter='" + data.button[i].buttonFilter + "'>" + data.button[i].buttonName + "</button>\n")
+        }
+
         form.render()
     },
 
@@ -131,9 +151,9 @@ var common = {
             where:data,
         })
     },
-    initSelect: (url, data, id) =>{
+    initSelect: (url, param, id) =>{
         $("#" + id).empty()
-        var data = req.post(url,data,false)
+        let data = req.post(url,param == null ? {req:'no'} : param,false, false)
         for(let i = 0; i < data.data.length; i++)
         {
             $("#" + id).append("<option value = '"+ data.data[i].name +"'>"+ data.data[i].name +"</option>")

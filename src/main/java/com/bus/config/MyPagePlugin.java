@@ -67,16 +67,19 @@ public class MyPagePlugin implements Interceptor {
             preparedStatement.close();
             //获得传进来的参数对象
             Map<String, Object> parameterObject = (Map<String, Object>) parameterHandler.getParameterObject();
-            PageUtil pageUtil = (PageUtil) parameterObject.get("page");
-            //赋值总个数
-            pageUtil.setCount(count);
+            if(!(parameterObject.get("page") == null)){
+                PageUtil pageUtil = (PageUtil) parameterObject.get("page");
+                //赋值总个数
+                pageUtil.setCount(count);
 
-            //拼接分页语句(limit) 并且修改mysql本该执行的语句
-            String pageSql = getPageSql(sql, pageUtil);
+                //拼接分页语句(limit) 并且修改mysql本该执行的语句
+                sql = getPageSql(sql, pageUtil);
+            }
 
-            preparedStatement = connection.prepareStatement(pageSql);
+
+            preparedStatement = connection.prepareStatement(sql);
             parameterHandler.setParameters(preparedStatement);
-            metaObject.setValue("delegate.boundSql.sql",pageSql);
+            metaObject.setValue("delegate.boundSql.sql",sql);
         }
         //推进拦截器调用链
         return invocation.proceed();

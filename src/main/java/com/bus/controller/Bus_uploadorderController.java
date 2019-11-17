@@ -21,12 +21,12 @@ public class Bus_uploadorderController{
 	}
 
 	@PostMapping("add")
-	public Map<String, Object> bus_uploadorderAdd(Bus_uploadorder bus_uploadorder){
+	public Map<String, Object> bus_uploadorderAdd(@RequestBody Bus_uploadorder bus_uploadorder){
 		return bus_uploadorderService.bus_uploadorderAdd(bus_uploadorder);
 	}
 
 	@PostMapping("edit")
-	public Map<String, Object> bus_uploadorderEdit(Bus_uploadorder bus_uploadorder){
+	public Map<String, Object> bus_uploadorderEdit(@RequestBody Bus_uploadorder bus_uploadorder){
 		return bus_uploadorderService.bus_uploadorderEdit(bus_uploadorder);
 	}
 

@@ -22,6 +22,6 @@ public interface Bus_busMapper{
 	boolean bus_busDel(Bus_bus bus_bus);
 
 	@Update("update bus_bus set uploadTime = #{uploadTime} where name = #{name}")
-	boolean bus_busUpdateTime(String time, String name);
+	boolean bus_busUpdateTime(String uploadTime, String name);
 
 }

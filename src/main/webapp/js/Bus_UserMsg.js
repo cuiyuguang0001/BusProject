@@ -3,7 +3,8 @@
 * 用户信息
 */
 var table = layui.table;
-form = layui.form
+form = layui.form;
+var index = 0;
 /**
  * 方法级渲染
  */
@@ -68,7 +69,7 @@ table.render({
             }, age:{
                 title:'年龄',
                 type:'text',
-                verify:'required'
+                verify:'number'
             }, sex:{
                 title:'性别',
                 type:'radio',
@@ -83,14 +84,20 @@ table.render({
             },sal:{
                 title:'薪资',
                 type:'text',
-                verify:'required'
+                verify:'number'
             },joinDate:{
                 title:'入职时间',
                 class:'layui-btn-disabled',
                 disable:true,
                 type:'text',
                 verify:'required'
-            }
+            },
+            button:[{
+                buttonFilter:'submit',
+                submit:true,
+                buttonName:'提交',
+                class:'layui-btn-lg layui-btn-radius layui-btn-fluid',
+            }]
         });
         /**
          * 添加
@@ -104,10 +111,11 @@ table.render({
             }, age:{
                 title:'年龄',
                 type:'text',
-                verify:'required'
+                verify:'number'
             }, sex:{
                 title:'性别',
                 type:'radio',
+                verify:'required',
                 value:['男','女'],
                 radioTitle:['男','女']
             },job:{
@@ -122,8 +130,14 @@ table.render({
             },sal:{
                 title:'薪资',
                 type:'text',
-                verify:'required'
-            }
+                verify:'number'
+            },
+            button:[{
+                buttonFilter:'submit',
+                submit:true,
+                class:'layui-btn-lg layui-btn-fluid layui-bg-orange',
+                buttonName:'提交',
+            }]
         });
         /**
          * 添加权限
@@ -137,8 +151,14 @@ table.render({
             }, list:{
                 title:'权限等级',
                 type:'text',
-                verify:'required',
-            }
+                verify:'number',
+            },
+            button:[{
+                buttonFilter:'submit',
+                buttonName:'提交信息',
+                class:'layui-btn-lg layui-btn-fluid',
+                submit:true
+            }]
         });
     }
 });
@@ -164,26 +184,20 @@ table.on('tool(userData)', function(obj){
             sal: data.sal,
             joinDate: data.joinDate
         });
-        layer.open({
+        index = layer.open({
             type: 1,
             title: '用户信息',
             closeBtn: false,
             shade: 0.5,
             id: 'YuanGongUpdate', //设定一个id，防止重复弹出,
-            btn:['提交','返回'],
+            btn:['取消操作'],
             btn1:function(index, layero){
-                req.post(myurl.userEdit, form.val('update'), false);
-                $(".update").css("display", "none");
-                layer.close(index);
-                table.reload('userData');
-            },
-            btn2:function(index, layero){
                 layer.close(index);
                 $(".update").css("display", "none");
                 return false;
             },
             btnAlign: 'c',
-            area: ['400px', '615px'],
+            area: ['33%', '80%'],
             cancel: function(index, layero) {
                 layer.close(index);
                 $(".update").css("display", "none");
@@ -196,18 +210,17 @@ table.on('tool(userData)', function(obj){
 })
 function insert(){
     common.initSelect(myurl.jobList, null, 'insert_job')
-    layer.open({
+    index = layer.open({
         type: 1,
         title: '用户信息',
         closeBtn: false,
         shade: 0.5,
         id: 'YuanGongUpdate1', //设定一个id，防止重复弹出,
-        btn:['提交','返回', '添加权限'],
+        btn:['添加权限', '取消操作'],
         btn1:function(index, layero){
-            req.post(myurl.userAdd,form.val('insert') , false);
+            tc();
             $(".insert").css("display", "none");
             layer.close(index);
-            table.reload('userData');
             return false;
         },
         btn2:function(index, layero){
@@ -215,14 +228,8 @@ function insert(){
             $(".insert").css("display", "none");
             return false;
         },
-        btn3:function(index, layero){
-            tc();
-            $(".insert").css("display", "none");
-            layer.close(index);
-            return false;
-        },
         btnAlign: 'c',
-        area: ['400px', '560px'],
+        area: ['36%', '96%'],
         cancel: function(index, layero) {
             layer.close(index);
             $(".insert").css("display", "none");
@@ -233,9 +240,8 @@ function insert(){
 }
 
 
-
 function tc(){
-    layer.open({
+    index = layer.open({
         type: 1,
         title: '添加权限',
         closeBtn: false,
@@ -243,23 +249,45 @@ function tc(){
         id: 'YuanGongUpdate', //设定一个id，防止重复弹出,
         btnAlign: 'c',
         area: ['400px', '400px'],
-        btn:['提交', '取消'],
-        btn1:function(index, layero) {
-            req.post(myurl.jobAdd, form.val('qx'), false)
+        btn:['取消操作'],
+        btn1: function(index, layero){
             $(".qx").css("display", "none");
             layer.close(index);
             return false;
         },
-        btn2: function(index, layero){
-            $(".qx").css("display", "none");
-            layer.close(index);
-            return false;
-        },
-        // cancel: function(index, layero) {
-        //     layer.close(index);
-        //     return false;
-        // },
         content: $(".qx").append(),
     });
 }
+
+/**
+ * 添加权限
+ */
+form.on('submit(qx)', function(data){
+    req.post(myurl.jobAdd, form.val('qx'), false);
+    $(".qx").css("display", "none");
+    layer.close(index);
+    table.reload('userData');
+    return false;
+})
+
+/**
+ * 一键添加
+ */
+form.on('submit(insert)', function(e){
+    req.post(myurl.userAdd, form.val('insert'), false);
+    $(".insert").css("display", "none");
+    layer.close(index);
+    table.reload('userData');
+    return false;
+})
+/**
+ * 一键修改
+ */
+form.on('submit(update)', function (data) {
+    req.post(myurl.userEdit, form.val('update'), false);
+    $(".update").css("display", "none");
+    layer.close(index);
+    table.reload('userData');
+    return false;
+})
 

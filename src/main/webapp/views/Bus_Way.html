@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>路线规划</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+    <script src="../js/httpReq.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<style type="text/css">
+    html,body{
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+    .map{
+        height: 100%;
+        width: 100%;
+        float: left;
+    }
+</style>
+<body>
+<div id="container" class="map"></div>
+<div id="panel"></div>
+<div class="info">
+    <div class="input-item">
+        <div class="input-item-prepend">
+            <span class="input-item-text" style="width:8rem;">请输入关键字</span>
+        </div>
+        <input id='tipinput' type="text">
+    </div>
+</div>
+<div class="input-card">
+    <h4>起始点(点击下方输入框进行绑定)：</h4>
+    <div class="input-item">
+        <input type="text" readonly="true" id="start" onclick="change(false)">
+    </div>
+    <h4>终点(点击下方输入框进行绑定)：</h4>
+    <div class="input-item">
+        <input type="text" readonly="true" id="end" onclick="change(true)">
+    </div>
+    <div class="layui-btn-container" style="margin-top: 10px">
+        <button  class="layui-btn" data-type="reload" onclick="driveWay()">开始规划</button>
+        <button  class="layui-btn" data-type="reload" onclick="submitWay()">提交规划</button>
+    </div>
+</div>
+
+<script src="https://webapi.amap.com/maps?v=1.4.15&key=e4c71a6b725d5792e5b17f41dbdde0fb&plugin=AMap.Autocomplete"></script>
+<script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+<script type="text/javascript">
+
+    var startMark = null;
+    var endMark = null;
+    var driving = null;
+    var endflag = false
+
+
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        zoom:11,
+        center: [116.397428, 39.90923]
+    });
+
+    //为地图注册click事件获取鼠标点击出的经纬度坐标
+    map.on('click', function(e) {
+
+
+        $(endflag ? "#end":"#start").val(e.lnglat.getLng() + ',' + e.lnglat.getLat())
+        mark = new AMap.Marker({
+            position: new AMap.LngLat(e.lnglat.getLng(), e.lnglat.getLat()),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+            title: '北京',
+            offset: new AMap.Pixel(-23, -60),
+            icon: "http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png",
+        });
+        if(endflag)
+        {
+            if(endMark != null)
+                map.remove(endMark)
+            endMark = mark
+        }
+        else{
+            if(startMark != null)
+                map.remove(startMark)
+            startMark = mark;
+        }
+
+
+        map.add(mark)
+    });
+    var auto = new AMap.Autocomplete({
+        input: "tipinput"
+    });
+    AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+
+    AMap.plugin('AMap.Driving', function() {
+        driving = new AMap.Driving({
+            map: map,
+            panel: "panel"
+        })
+    })
+    function driveWay() {
+
+            driving.clear()
+
+            driving.search($('#start').val().split(','), $('#end').val().split(','), function(status, result) {
+                if (status === 'complete') {
+                    log.success('绘制驾车路线完成')
+                } else {
+                    log.error('获取驾车数据失败：' + result)
+                }
+            })
+
+    }
+
+    function select(e) {
+        if (e.poi && e.poi.location) {
+            map.setZoom(15);
+            map.setCenter(e.poi.location);
+        }
+    }
+    function change(e){
+        endflag = e
+    }
+
+</script>
+</body>
+</html>

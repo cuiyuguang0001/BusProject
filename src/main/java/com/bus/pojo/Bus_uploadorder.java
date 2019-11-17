@@ -8,7 +8,7 @@ public class Bus_uploadorder{
 	//金额
 	private int money;
 	//维修原因
-	private String desc;
+	private String bdesc;
 	//时间
 	private String time;
 	//状态0未审核1通过2拒绝
@@ -38,12 +38,12 @@ public class Bus_uploadorder{
 		this.money=money;
 	}
 
-	public String getDesc(){
-		return desc;
+	public String getBdesc(){
+		return bdesc;
 	}
 
-	public void setDesc(String desc){
-		this.desc=desc;
+	public void setBdesc(String bdesc){
+		this.bdesc=bdesc;
 	}
 
 	public String getTime(){

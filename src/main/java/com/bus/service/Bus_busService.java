@@ -19,14 +19,17 @@ public class Bus_busService{
 	Bus_busMapper bus_busMapper;
 
 	public Map<String, Object> bus_busList(Map<String, Object> map){
-		PageUtil pageUtil = new PageUtil((int)map.get("page"), (int)map.get("limit"));
-		map.put("page", pageUtil);
+		PageUtil pageUtil = null;
+		if(map.get("req") == null){
+			pageUtil = new PageUtil((int)map.get("page"), (int)map.get("limit"));
+			map.put("page", pageUtil);
+		}
 		List<Bus_bus> bus_users = bus_busMapper.bus_busList(map);
 		for(Bus_bus b : bus_users){
 			b.setBuyTime(CommitUtil.timestampToStr(Long.valueOf(b.getBuyTime())));
 			b.setUploadTime(CommitUtil.timestampToStr(Long.valueOf(b.getUploadTime())));
 		}
-		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_users, pageUtil.getCount());
+		return new Request().ok(Constant.REQUEST_GOOD).okList(bus_users, pageUtil == null ? 0 : pageUtil.getCount());
 	}
 
 	public Map<String, Object> bus_busAdd(Bus_bus bus_bus){

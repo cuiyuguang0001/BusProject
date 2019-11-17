@@ -4,6 +4,7 @@
 */
 var table = layui.table;
 form = layui.form
+var index = 0
 /**
  * 方法级渲染
  */
@@ -88,7 +89,12 @@ table.render({
                     1: '已启用',
                     0: '未启用'
                 },
-            }
+            }, button:[{
+                buttonFilter:'submit',
+                buttonName:'立即修改',
+                class:'layui-btn-lg layui-btn-fluid',
+                submit:true
+            }]
         });
         /**
          * 添加
@@ -103,7 +109,12 @@ table.render({
                 title:'型号',
                 type:'text',
                 verify:'required'
-            }
+            },button:[{
+                buttonFilter:'submit',
+                buttonName:'立即添加',
+                class:'layui-btn-lg layui-btn-fluid',
+                submit:true
+            }]
         });
     }
 });
@@ -128,58 +139,45 @@ table.on('tool(busData)', function(obj){
             uploadTime: data.uploadTime,
             state: data.state,
         });
-        layer.open({
+        index = layer.open({
             type: 1,
-            title: '用户信息',
+            title: '车辆信息',
             closeBtn: false,
             shade: 0.5,
-            id: 'YuanGongUpdate', //设定一个id，防止重复弹出,
-            btn:['立即修改','返回'],
+            id: 'busUpdate', //设定一个id，防止重复弹出,
+            btn:['取消操作'],
             btn1:function(index, layero){
-                req.post(myurl.bus_busEdit, form.val('update'), false);
-                $(".update").css("display", "none");
-                layer.close(index);
-                table.reload('busData');
-            },
-            btn2:function(index, layero){
                 layer.close(index);
                 $(".update").css("display", "none");
                 return false;
             },
             btnAlign: 'c',
-            area: ['400px', '630px'],
-            cancel: function(index, layero) {
-                layer.close(index);
-                $(".update").css("display", "none");
-                return false;
-            },
+            area: ['34%', '70%'],
+            // cancel: function(index, layero) {
+            //     layer.close(index);
+            //     $(".update").css("display", "none");
+            //     return false;
+            // },
             content: $(".update").append(),
-            id: "alertcenterdiv",
+            // id: "alertcenterdiv",
         });
     }
 })
 function insert() {
-    layer.open({
+    index = layer.open({
         type: 1,
         title: '车辆信息',
         closeBtn: false,
         shade: 0.5,
         id: 'YuanGongUpdate1', //设定一个id，防止重复弹出,
-        btn:['立即添加','返回'],
+        btn:['取消操作'],
         btn1:function(index, layero){
-            req.post(myurl.bus_busAdd,form.val('insert') , false);
-            $(".insert").css("display", "none");
-            layer.close(index);
-            table.reload('busData');
-            return false;
-        },
-        btn2:function(index, layero){
             layer.close(index);
             $(".insert").css("display", "none");
             return false;
         },
         btnAlign: 'c',
-        area: ['400px', '350px'],
+        area: ['32%', '66%'],
         cancel: function(index, layero) {
             layer.close(index);
             $(".insert").css("display", "none");
@@ -187,5 +185,26 @@ function insert() {
         },
         content: $(".insert").append(),
     });
-
 }
+
+/**
+ * 一键添加
+ */
+form.on('submit(insert)', function(e){
+    layer.closeAll();
+    req.post(myurl.bus_busAdd, form.val('insert'), false);
+    $(".insert").css("display", "none");
+    table.reload('busData');
+    return false;
+})
+
+/**
+ * 一键修改
+ */
+form.on('submit(update)', function(e){
+    req.post(myurl.bus_busEdit, form.val('update'), false);
+    $(".update").css("display", "none");
+    layer.close(index);
+    table.reload('busData');
+    return false;
+})
